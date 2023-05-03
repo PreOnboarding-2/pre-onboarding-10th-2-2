@@ -11,15 +11,14 @@ export interface Item {
   id: number;
 }
 
-//TODO: 로컬 캐싱, 캐싱 유효시간 구현
-//FIXME: 검색창 입력값 다 지웠을 떄 list 비우기, 첫 검색 아래 방향키 누를때 2번째 접근 고치기
-
 const SearchArea = () => {
+  const delaySec = 500;
+  const expTime = 300000;
   const [value, setValue] = useState<string>("");
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
   const [list, setList] = useState<Item[]>([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState<number>(-1);
-  const debouncedValue = useDebounce(value, 500);
+  const debouncedValue = useDebounce(value, delaySec);
 
   useEffect(() => {
     const keyword = debouncedValue?.trim();
@@ -27,10 +26,23 @@ const SearchArea = () => {
       return;
     }
 
+    const cachedResult = localStorage.getItem(keyword);
+    if (cachedResult) {
+      const { timestamp, data } = JSON.parse(cachedResult);
+      if (Date.now() - timestamp < expTime) {
+        setList(data);
+        return;
+      }
+      localStorage.removeItem(keyword);
+    }
+
     const fetchData = async () => {
       const response = await API.get(`/?name=${keyword}`);
-      setList(response.data);
+      const resultList = response.data.slice(0, 7);
+      setList(resultList);
+      localStorage.setItem(keyword, JSON.stringify(resultList));
     };
+
     fetchData();
     console.info("calling api");
   }, [debouncedValue]);
@@ -48,29 +60,26 @@ const SearchArea = () => {
     setIsInputFocused(false);
   };
 
-  useEffect(() => {
-    if (selectedItemIndex !== -1) {
-      setValue(list[selectedItemIndex]?.name);
-    }
-  }, [selectedItemIndex, list]);
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!debouncedValue) {
+    if (list.length === 0) return;
+
+    if (e.nativeEvent.isComposing) {
       return;
     }
 
-    if (selectedItemIndex === -1) {
-      if (e.key === "ArrowUp") {
-        setSelectedItemIndex(list.length - 1);
-      } else if (e.key === "ArrowDown") {
-        setSelectedItemIndex(0);
-      }
-    } else {
-      if (e.key === "ArrowUp") {
+    switch (e.key) {
+      case "ArrowUp":
         setSelectedItemIndex(prev => (prev === 0 ? list.length - 1 : prev - 1));
-      } else if (e.key === "ArrowDown") {
+        break;
+      case "ArrowDown":
         setSelectedItemIndex(prev => (prev === list.length - 1 ? 0 : prev + 1));
-      }
+        break;
+      case "Enter":
+        if (selectedItemIndex !== -1) {
+          setValue(list[selectedItemIndex].name);
+          setSelectedItemIndex(-1);
+        }
+        break;
     }
   };
 
