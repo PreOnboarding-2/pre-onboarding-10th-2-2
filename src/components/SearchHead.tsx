@@ -11,7 +11,7 @@ const SearchHead = () => {
 const Heading = styled.div`
   margin: 40px 0px;
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.6rem;
   font-weight: 700;
   line-height: 1.6;
   letter-spacing: -0.018em;

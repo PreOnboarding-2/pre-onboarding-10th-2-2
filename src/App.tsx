@@ -20,8 +20,7 @@ const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 20rem;
-  margin-top: 10rem;
+  height: 100vh;
   background-color: #cae9ff;
 `;
 
