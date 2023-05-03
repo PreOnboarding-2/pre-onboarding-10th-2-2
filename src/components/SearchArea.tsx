@@ -24,8 +24,7 @@ const SearchArea = () => {
     }
 
     const fetchData = async () => {
-      // const response = await API.get(`/?name=${debouncedValue}`);
-      const response = await API.get(`/?p=${debouncedValue}`);
+      const response = await API.get(`/?name=${debouncedValue}`);
       setList(response.data);
     };
     fetchData();
@@ -47,7 +46,7 @@ const SearchArea = () => {
 
   useEffect(() => {
     if (selectedItemIndex !== -1) {
-      setValue(list[selectedItemIndex].name);
+      setValue(list[selectedItemIndex]?.name);
     }
   }, [selectedItemIndex, list]);
 
@@ -88,7 +87,13 @@ const SearchArea = () => {
         />
         <Button />
       </SearchBarWrapper>
-      {isInputFocused && <SearchList list={list} selectedItemIndex={selectedItemIndex} />}
+      {isInputFocused && (
+        <SearchList
+          list={list}
+          selectedItemIndex={selectedItemIndex}
+          setSelectedItemIndex={setSelectedItemIndex}
+        />
+      )}
     </SearchContainer>
   );
 };
