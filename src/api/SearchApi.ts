@@ -1,10 +1,11 @@
 import customAxios from "../lib/customAxios";
 
-interface ReturnType {}
+interface ReturnType { }
 
 const SearchApi = () => {
   const getRecommend = async (keyword: string): Promise<ReturnType> => {
-    const result = await customAxios.get("/name=" + keyword);
+    console.info("calling api");
+    const result = await customAxios.get("/?name=" + keyword);
     return result;
   };
 

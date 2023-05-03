@@ -5,10 +5,4 @@ const customAxios = axios.create({
   baseURL: SERVER,
 });
 
-customAxios.interceptors.request.use(config => {
-  config.withCredentials = true;
-  config.headers["Access-Control-Allow-Origin"] = "*";
-  return config;
-});
-
 export default customAxios;
