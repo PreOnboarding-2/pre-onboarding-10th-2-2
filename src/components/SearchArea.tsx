@@ -52,9 +52,19 @@ const SearchArea = () => {
   }, [selectedItemIndex, list]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!debouncedValue) {
+      return;
+    }
+
+    if (selectedItemIndex === -1 && e.key === "ArrowUp") {
+      setSelectedItemIndex(list.length);
+    }
+
     if (e.key === "ArrowUp") {
       setSelectedItemIndex(prev => (prev === 0 ? list.length - 1 : prev - 1));
-    } else if (e.key === "ArrowDown") {
+    }
+
+    if (e.key === "ArrowDown") {
       setSelectedItemIndex(prev => (prev === list.length - 1 ? 0 : prev + 1));
     }
   };
