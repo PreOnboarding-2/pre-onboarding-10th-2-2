@@ -1,13 +1,30 @@
 import { Recommend } from "../types/utilsType";
 
+const EXPIRE_TIME = 50000;
+
 export const setKeyword = (keyword: string, recommend: Recommend) => {
-  sessionStorage.setItem(keyword, JSON.stringify(recommend));
+  const obj = {
+    value: recommend,
+    expire: Date.now() + EXPIRE_TIME
+  }
+  localStorage.setItem(keyword, JSON.stringify(obj));
 };
 
 export const getKeyword = (keyword: string) => {
-  return JSON.parse(sessionStorage.getItem(keyword)!);
+  const objString = localStorage.getItem(keyword);
+  if (!objString) {
+    return false;
+  }
+
+  const obj = JSON.parse(objString);
+  if (Date.now() > obj.expire) {
+    localStorage.removeItem(keyword);
+    return false;
+  }
+
+  return obj.value;
 };
 
 export const removeKeyword = (keyword: string) => {
-  sessionStorage.removeItem(keyword);
+  localStorage.removeItem(keyword);
 };
