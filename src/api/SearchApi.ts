@@ -1,6 +1,13 @@
 import customAxios from "../lib/customAxios";
 
-interface ReturnType { }
+interface Data {
+  name: string;
+  id: number;
+}
+
+interface ReturnType {
+  data: Data[];
+}
 
 const SearchApi = () => {
   const getRecommend = async (keyword: string): Promise<ReturnType> => {

@@ -28,7 +28,7 @@ export const TextWrapper = styled.div`
   :hover {
     background-color: #f7f7fb;
   }
-  background-color: ${(props) => props.color || "none"}
+  background-color: ${props => props.color || "none"};
 `;
 
 export const Text = styled.p`
@@ -45,4 +45,3 @@ export const RecommendText = styled.p`
   font-size: 0.8rem;
   margin-left: 0.7rem;
 `;
-

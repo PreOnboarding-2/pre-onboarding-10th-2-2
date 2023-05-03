@@ -11,26 +11,25 @@ const useRecommned = () => {
   });
   const selected = useSelector((state: RootState) => {
     return state.selected;
-  })
+  });
 
   const keydownHandler = (e: React.KeyboardEvent) => {
     if (search.recommend.length > 0) {
       switch (e.key) {
         case "ArrowDown":
-          if (selected.selectedIndex >= search.recommend.length - 1)
-            dispatch(set(0));
-          else
-            dispatch(up(1))
+          if (selected.selectedIndex >= search.recommend.length - 1) dispatch(set(0));
+          else dispatch(up(1));
           break;
         case "ArrowUp":
-          if (selected.selectedIndex <= 0)
-            dispatch(set(search.recommend.length - 1));
-          else
-            dispatch(down(1));
+          if (selected.selectedIndex <= 0) dispatch(set(search.recommend.length - 1));
+          else dispatch(down(1));
+          break;
+        case "Enter":
+          alert(search.recommend[selected.selectedIndex].name);
           break;
       }
     }
-  }
+  };
 
   return { search, keydownHandler };
 };
