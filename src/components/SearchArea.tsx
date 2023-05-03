@@ -56,16 +56,18 @@ const SearchArea = () => {
       return;
     }
 
-    if (selectedItemIndex === -1 && e.key === "ArrowUp") {
-      setSelectedItemIndex(list.length);
-    }
-
-    if (e.key === "ArrowUp") {
-      setSelectedItemIndex(prev => (prev === 0 ? list.length - 1 : prev - 1));
-    }
-
-    if (e.key === "ArrowDown") {
-      setSelectedItemIndex(prev => (prev === list.length - 1 ? 0 : prev + 1));
+    if (selectedItemIndex === -1) {
+      if (e.key === "ArrowUp") {
+        setSelectedItemIndex(list.length - 1);
+      } else if (e.key === "ArrowDown") {
+        setSelectedItemIndex(0);
+      }
+    } else {
+      if (e.key === "ArrowUp") {
+        setSelectedItemIndex(prev => (prev === 0 ? list.length - 1 : prev - 1));
+      } else if (e.key === "ArrowDown") {
+        setSelectedItemIndex(prev => (prev === list.length - 1 ? 0 : prev + 1));
+      }
     }
   };
 
