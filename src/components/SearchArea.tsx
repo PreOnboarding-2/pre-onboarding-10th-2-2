@@ -11,6 +11,9 @@ export interface Item {
   id: number;
 }
 
+//TODO: 로컬 캐싱, 캐싱 유효시간 구현
+//FIXME: 검색창 입력값 다 지웠을 떄 list 비우기, 첫 검색 아래 방향키 누를때 2번째 접근 고치기
+
 const SearchArea = () => {
   const [value, setValue] = useState<string>("");
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
@@ -19,7 +22,7 @@ const SearchArea = () => {
   const debouncedValue = useDebounce(value, 500);
 
   useEffect(() => {
-    const keyword = debouncedValue.trim();
+    const keyword = debouncedValue?.trim();
     if (!keyword) {
       return;
     }
