@@ -27,8 +27,7 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "format": "prettier --cache --write .",
-    "lint": "eslint --cache --max-warnings=0 .",
-    "db": "json-server --watch db.json --port 3001"
+    "lint": "eslint --cache --max-warnings=0 ."
   },
   "eslintConfig": {
     "extends": [
@@ -55,7 +54,6 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.3",
-    "json-server": "^0.17.3",
     "prettier": "2.8.8"
   },
   "proxy": "https://api.clinicaltrialskorea.com"
