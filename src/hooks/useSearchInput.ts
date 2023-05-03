@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import SearchApi from "../api/SearchApi";
 import { useDispatch } from "react-redux";
 import { set } from "../store/searchSlice";
@@ -7,17 +7,11 @@ const useSearchInput = () => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (input.trim() !== "") {
-      getRecommendHandler();
-    }
-  }, [input]);
-
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
-  const getRecommendHandler = async () => {
+  const getRecommendHandler = useCallback(async () => {
     try {
       const result = await SearchApi.getRecommend(input);
       const data = {
@@ -28,11 +22,21 @@ const useSearchInput = () => {
     } catch (error) {
       alert(error);
     }
-  };
+  }, [dispatch, input]);
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
+
+  let timer: any;
+  useEffect(() => {
+    if (input.trim() !== "") {
+      timer = setTimeout(() => {
+        getRecommendHandler();
+      }, 300);
+    }
+    return () => clearTimeout(timer);
+  }, [input, getRecommendHandler]);
 
   return {
     input,
