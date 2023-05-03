@@ -1,47 +1,13 @@
-import React, { ChangeEvent, useCallback, KeyboardEvent, useEffect, useState } from "react";
-import axiosInstance from "../../lib/axiosInstance";
 import IconSearch from "../../assets/icon-search.svg";
 import IconSearchWhite from "../../assets/icon-search-white.svg";
-import { SearchData } from "../../types/data";
 import DropDown from "../DropDown/DropDown";
 import useKeyHandler from "../../hooks/useKeyHandler";
 import * as St from "./SearchInput.style";
+import useDebounce from "../../hooks/useDebounce";
 
-const Input = () => {
-  const [keyWord, setKeyWord] = useState("");
-  const [recommendData, setRecommendData] = useState<SearchData[]>([]);
-  const { handleArrowDown, handleArrowUp, handleEnter } = useKeyHandler();
-
-  const getRecommendData = useCallback(async () => {
-    if (keyWord) {
-      const data = await axiosInstance.get(`/?name=${keyWord}`);
-      setRecommendData(data.data);
-    }
-  }, [keyWord]);
-
-  useEffect(() => {
-    getRecommendData();
-  }, [getRecommendData]);
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setKeyWord(e.target.value);
-  };
-
-  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
-    switch (e.key) {
-      case "ArrowDown":
-        handleArrowDown();
-        break;
-      case "ArrowUp":
-        handleArrowUp();
-        break;
-      case "Enter":
-        handleEnter();
-        break;
-      default:
-        break;
-    }
-  };
+const SearchInput = () => {
+  const { onKeyDown } = useKeyHandler();
+  const { keyWord, onChange, recommendData } = useDebounce();
 
   return (
     <St.InputContainer>
@@ -64,4 +30,4 @@ const Input = () => {
   );
 };
 
-export default Input;
+export default SearchInput;

@@ -1,9 +1,9 @@
 import React from "react";
-import { SearchData } from "../../types/data";
+import { SearchDataType } from "../../types/data";
 import IconSearch from "../../assets/icon-search.svg";
 import * as St from "./DropDown.styles";
 
-const DropDown = ({ recommendData }: { recommendData: SearchData[] }) => {
+const DropDown = ({ recommendData }: { recommendData: SearchDataType[] }) => {
   return (
     <St.DropDownContainer>
       {recommendData.length === 0 ? (
