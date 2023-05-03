@@ -11,7 +11,7 @@ const useSearchInput = () => {
     if (input.trim() !== "") {
       getRecommendHandler();
     }
-  }, [input, dispatch]);
+  }, [input]);
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -22,13 +22,13 @@ const useSearchInput = () => {
       const result = await SearchApi.getRecommend(input);
       const data = {
         keyword: input,
-        recommend: result.data
-      }
-      dispatch(set(data))
+        recommend: result.data,
+      };
+      dispatch(set(data));
     } catch (error) {
       alert(error);
     }
-  }
+  };
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
