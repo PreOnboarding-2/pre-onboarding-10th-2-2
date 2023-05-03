@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SelectedInital } from "../types/storeType";
 
-type InitalState = {
-  selectedIndex: number;
-};
-
-const initialState: InitalState = {
+const initialState: SelectedInital = {
   selectedIndex: 0,
 };
 

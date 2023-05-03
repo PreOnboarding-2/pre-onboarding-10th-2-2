@@ -1,16 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SearchInital } from "../types/storeType";
 
-type Recommend = {
-  name: string;
-  id: number;
-};
-
-type InitalState = {
-  keyword: string;
-  recommend: Array<Recommend>;
-};
-
-const initialState: InitalState = {
+const initialState: SearchInital = {
   keyword: "",
   recommend: [],
 };
