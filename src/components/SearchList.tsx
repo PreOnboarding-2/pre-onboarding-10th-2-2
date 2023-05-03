@@ -1,5 +1,12 @@
-import { ListContainer, ListTitle, ListItem } from "./styles/searchList.style";
+import {
+  ListContainer,
+  ListTitle,
+  ListItem,
+  ListIconWrapper,
+  ListFlex,
+} from "./styles/searchList.style";
 import { Item } from "./SearchArea";
+import SearchIcon from "./SearchIcon";
 
 interface SearchListProps {
   list: Item[];
@@ -13,19 +20,27 @@ const SearchList = ({ list, selectedItemIndex }: SearchListProps) => {
       {list.length ? (
         list.map((result, index) => {
           return (
-            <ListItem
+            <ListFlex
               key={result.id}
-              tabIndex={0}
               style={{
                 background: selectedItemIndex === index ? "#ececec" : "white",
               }}
             >
-              {result.name}
-            </ListItem>
+              <ListIconWrapper>
+                <SearchIcon />
+              </ListIconWrapper>
+              <ListItem tabIndex={0}>{result.name}</ListItem>
+            </ListFlex>
           );
         })
       ) : (
-        <ListItem>검색어가 없음</ListItem>
+        <ListItem
+          style={{
+            marginLeft: "10px",
+          }}
+        >
+          검색어 없음
+        </ListItem>
       )}
     </ListContainer>
   );
