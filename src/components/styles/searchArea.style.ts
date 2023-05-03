@@ -27,6 +27,7 @@ export const SearchBarWrapper = styled.div`
 `;
 
 export const Input = styled.input`
+  margin-left: 25px;
   flex-direction: row;
   flex: 1;
   align-items: center;
@@ -45,4 +46,12 @@ export const Input = styled.input`
     color: #a7afb7;
     font-size: 1.125rem;
   }
+`;
+
+export const IconWrapper = styled.div`
+  width: 1.2rem;
+  height: 1.2rem;
+  position: absolute;
+  left: 20px;
+  color: #a7afb7;
 `;

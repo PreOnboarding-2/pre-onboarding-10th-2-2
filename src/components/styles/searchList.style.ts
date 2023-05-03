@@ -20,8 +20,22 @@ export const ListTitle = styled.div`
 export const ListItem = styled.li`
   padding-top: 13px;
   padding-bottom: 13px;
-  padding-left: 20px;
+  padding-left: 10px;
   font-size: 1rem;
   list-style: none;
   cursor: pointer;
+`;
+
+export const ListIconWrapper = styled.div`
+  width: 1.2rem;
+  height: 1.2rem;
+  color: #a7afb7;
+  margin-left: 20px;
+  margin-bottom: 3px;
+`;
+
+export const ListFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
