@@ -12,10 +12,9 @@ import React from "react";
 interface SearchListProps {
   list: Item[];
   selectedItemIndex: number;
-  setSelectedItemIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const SearchList = ({ list, selectedItemIndex, setSelectedItemIndex }: SearchListProps) => {
+const SearchList = ({ list, selectedItemIndex }: SearchListProps) => {
   return (
     <ListContainer id="list">
       <ListTitle>추천 검색어</ListTitle>
@@ -31,9 +30,7 @@ const SearchList = ({ list, selectedItemIndex, setSelectedItemIndex }: SearchLis
               <ListIconWrapper>
                 <SearchIcon />
               </ListIconWrapper>
-              <ListItem tabIndex={0} onMouseEnter={() => setSelectedItemIndex(index)}>
-                {result.name}
-              </ListItem>
+              <ListItem>{result.name}</ListItem>
             </ListFlex>
           );
         })

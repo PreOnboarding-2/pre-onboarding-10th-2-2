@@ -100,13 +100,7 @@ const SearchArea = () => {
         />
         <Button />
       </SearchBarWrapper>
-      {isInputFocused && (
-        <SearchList
-          list={list}
-          selectedItemIndex={selectedItemIndex}
-          setSelectedItemIndex={setSelectedItemIndex}
-        />
-      )}
+      {isInputFocused && <SearchList list={list} selectedItemIndex={selectedItemIndex} />}
     </SearchContainer>
   );
 };
