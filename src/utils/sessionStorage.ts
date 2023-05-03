@@ -1,12 +1,12 @@
 import { Recommend } from "../types/utilsType";
 
-const EXPIRE_TIME = 50000;
+const EXPIRE_TIME = 7200000;
 
 export const setKeyword = (keyword: string, recommend: Recommend) => {
   const obj = {
     value: recommend,
-    expire: Date.now() + EXPIRE_TIME
-  }
+    expire: Date.now() + EXPIRE_TIME,
+  };
   localStorage.setItem(keyword, JSON.stringify(obj));
 };
 

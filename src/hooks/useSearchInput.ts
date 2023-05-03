@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import SearchApi from "../api/SearchApi";
 import { useDispatch } from "react-redux";
 import { set } from "../store/searchSlice";
-import { getKeyword, setKeyword } from '../utils/sessionStorage';
+import { getKeyword, setKeyword } from "../utils/sessionStorage";
 
 const useSearchInput = () => {
   const [input, setInput] = useState("");
@@ -18,7 +18,7 @@ const useSearchInput = () => {
         const result = getKeyword(input);
         const data = {
           keyword: input,
-          recommend: result
+          recommend: result,
         };
         dispatch(set(data));
       } else {
@@ -28,7 +28,9 @@ const useSearchInput = () => {
           recommend: result.data,
         };
         dispatch(set(data));
-        setKeyword(input, result.data);
+        if (result.data.length !== 0) {
+          setKeyword(input, result.data);
+        }
       }
     } catch (error) {
       alert(error);
