@@ -14,7 +14,7 @@ const searchSlice = createSlice({
       state.keyword = action.payload.keyword;
       state.recommend = action.payload.recommend;
     },
-    init: (state, action) => {
+    init: state => {
       state.keyword = "";
       state.recommend = [];
     },

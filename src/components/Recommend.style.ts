@@ -17,7 +17,7 @@ export const RecommendWrapper = styled.div`
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
-export const TextWrapper = styled.div`
+export const Wrapper = styled.div`
   border-radius: 10px;
   margin: 0.3rem;
   padding: 0.3rem;
@@ -31,9 +31,12 @@ export const TextWrapper = styled.div`
   background-color: ${props => props.color || "none"};
 `;
 
-export const Text = styled.p`
-  font-size: 1rem;
+export const TextWrapper = styled.div`
   margin-left: 1rem;
+`;
+
+export const Text = styled.span`
+  font-size: 1rem;
 `;
 
 export const BoldText = styled(Text)`

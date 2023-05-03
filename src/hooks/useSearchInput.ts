@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import SearchApi from "../api/SearchApi";
 import { useDispatch } from "react-redux";
-import { set } from "../store/searchSlice";
+import { set, init } from "../store/searchSlice";
 import { getKeyword, setKeyword } from "../utils/sessionStorage";
 
 const useSearchInput = () => {
@@ -47,9 +47,11 @@ const useSearchInput = () => {
       timer = setTimeout(() => {
         getRecommendHandler();
       }, 300);
+    } else {
+      dispatch(init())
     }
     return () => clearTimeout(timer);
-  }, [input, getRecommendHandler]);
+  }, [input, getRecommendHandler, dispatch]);
 
   return {
     input,
