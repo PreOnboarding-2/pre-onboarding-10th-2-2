@@ -1,16 +1,32 @@
 import React from "react";
+import { SearchData } from "../../types/data";
+import IconSearch from "../../assets/icon-search.svg";
+import * as St from "./DropDown.styles";
 
-const DropDown = () => {
+const DropDown = ({ recommendData }: { recommendData: SearchData[] }) => {
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "50%",
-        width: "100%",
-        height: "300px",
-        backgroundColor: "ivory",
-      }}
-    ></div>
+    <St.DropDownContainer>
+      {recommendData.length === 0 ? (
+        <St.Span>검색결과가 없습니다</St.Span>
+      ) : (
+        <>
+          <St.Span>추천 검색어</St.Span>
+          {recommendData.map(data => (
+            <St.ListContainer key={data.id}>
+              <img src={IconSearch} alt="IconSearch" style={{ margin: "5px 0px 0px 40px" }} />
+              <span
+                style={{
+                  listStyle: "none",
+                  padding: "11px 10px",
+                }}
+              >
+                {data.name}
+              </span>
+            </St.ListContainer>
+          ))}
+        </>
+      )}
+    </St.DropDownContainer>
   );
 };
 
