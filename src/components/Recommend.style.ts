@@ -11,9 +11,9 @@ export const Section = styled.section`
 export const RecommendWrapper = styled.div`
   width: 50%;
   text-align: left;
-  border: 0.5rem solid #FFFFFF;
+  border: 0.5rem solid #ffffff;
   border-radius: 20px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
@@ -27,17 +27,17 @@ export const Text = styled.p`
   align-items: center;
 
   :hover {
-    background-color: #F7F7FB;
+    background-color: #f7f7fb;
   }
 `;
 
 export const RecommendText = styled.p`
-  color: #BABABA;
+  color: #bababa;
   font-size: 0.8rem;
 `;
 
 export const RecommendDiv = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 `;

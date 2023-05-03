@@ -4,7 +4,7 @@ export const Section = styled.section`
   margin-top: 7rem;
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
 `;
 
 export const Form = styled.form`
@@ -14,8 +14,8 @@ export const Form = styled.form`
   align-items: center;
   border-radius: 42px;
   border: 2px solid;
-  border-color: #FFFFFF;
-  background-color: #FFFFFF;
+  border-color: #ffffff;
+  background-color: #ffffff;
   padding: 0.3rem;
 `;
 
@@ -23,8 +23,8 @@ export const Input = styled.input`
   display: flex;
   width: 80%;
   border: 2px solid;
-  border-color: #FFFFFF;
-  background-color: #FFFFFF;
+  border-color: #ffffff;
+  background-color: #ffffff;
   align-items: center;
   font-size: 1rem;
   font-weight: 400;
@@ -40,8 +40,8 @@ export const Button = styled.button`
   height: 48px;
   border: 0;
   cursor: pointer;
-  background-color: #007BE9;
-  color: #FFFFFF;
+  background-color: #007be9;
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;

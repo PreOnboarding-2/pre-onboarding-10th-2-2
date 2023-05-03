@@ -1,4 +1,4 @@
-import { Recommend } from '../types/utilsType';
+import { Recommend } from "../types/utilsType";
 
 export const setKeyword = (keyword: string, recommend: Recommend) => {
   sessionStorage.setItem(keyword, JSON.stringify(recommend));

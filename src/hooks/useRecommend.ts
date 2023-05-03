@@ -7,6 +7,6 @@ const useRecommned = () => {
   });
 
   return { search };
-}
+};
 
 export default useRecommned;

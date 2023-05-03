@@ -7,7 +7,7 @@ const customAxios = axios.create({
 
 customAxios.interceptors.request.use(config => {
   config.withCredentials = true;
-  config.headers['Access-Control-Allow-Origin'] = '*';
+  config.headers["Access-Control-Allow-Origin"] = "*";
   return config;
 });
 

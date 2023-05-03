@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SearchApi from '../api/SearchApi';
+import SearchApi from "../api/SearchApi";
 import { useDispatch } from "react-redux";
 import { set } from "../store/searchSlice";
 
@@ -80,27 +80,27 @@ const useSearchInput = () => {
       recommend: DUMMY_DATA,
     };
     dispatch(set(data));
-  }, [input]);
+  }, [input, dispatch]);
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-  }
+  };
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert("검색됨: " + input);
     try {
       const result = await SearchApi.getRecommend(input);
-      alert(result)
+      alert(result);
     } catch (error) {
-      alert(error)
+      alert(error);
     }
-  }
+  };
 
   return {
     input,
     changeHandler,
-    submitHandler
+    submitHandler,
   };
 };
 
