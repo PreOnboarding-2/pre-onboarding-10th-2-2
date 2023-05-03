@@ -19,12 +19,13 @@ const SearchArea = () => {
   const debouncedValue = useDebounce(value, 500);
 
   useEffect(() => {
-    if (!debouncedValue) {
+    const keyword = debouncedValue.trim();
+    if (!keyword) {
       return;
     }
 
     const fetchData = async () => {
-      const response = await API.get(`/?name=${debouncedValue}`);
+      const response = await API.get(`/?name=${keyword}`);
       setList(response.data);
     };
     fetchData();
