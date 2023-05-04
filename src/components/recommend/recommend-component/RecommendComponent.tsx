@@ -1,7 +1,7 @@
 import React from "react";
 import { RecommendWrapper } from "./RecommendComponent.style";
 import { RecommendComponentProps } from "../../../types/recommend/RecommendProps";
-// import RecommendTitle from "../recommend-title/RecommendTitle";
+import RecommendTitle from "../recommend-title/RecommendTitle";
 import RecommendList from "../recommend-list/RecommendList";
 
 const RecommendComponent = ({
@@ -10,9 +10,12 @@ const RecommendComponent = ({
   inputText,
   isError,
 }: RecommendComponentProps) => {
+  const isEmpty = inputText === '';
+  const titleText = isEmpty || isError ? '검색어 없음' : '추천 검색어';
+  
   return (
     <RecommendWrapper isFocus={isFocus}>
-      {/* <RecommendTitle>{titleText}</RecommendTitle> */}
+      <RecommendTitle>{titleText}</RecommendTitle>
       <RecommendList searchList={searchList} inputText={inputText} />
     </RecommendWrapper>
   );

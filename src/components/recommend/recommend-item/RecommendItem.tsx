@@ -6,7 +6,7 @@ import { NormalText, Bold } from "../../common/font-weight/font-weight";
 
 const RecommendItem = ({ children, inputText }: RecommendItemProps) => {
   const newName = (children as string).split(inputText).map((char, idx) => {
-    if (char === '') return <Bold key={idx}>{inputText}</Bold>;
+    if (char === "") return <Bold key={idx}>{inputText}</Bold>;
     return <NormalText key={idx}>{char}</NormalText>;
   });
 
