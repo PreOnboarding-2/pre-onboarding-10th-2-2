@@ -1,50 +1,17 @@
-import { useState, useEffect, ChangeEvent, useCallback } from "react";
-import axiosInstance from "../lib/axiosInstance";
-import { SearchDataType } from "../types/data";
+import { useState, useEffect } from "react";
 
-const useDebounce = () => {
-  const [keyWord, setKeyWord] = useState("");
-  const [recommendData, setRecommendData] = useState<SearchDataType[]>([]);
-
-  const getRecommendData = useCallback(async () => {
-    if (keyWord) {
-      const URL = `/?name=${keyWord}`;
-
-      const cacheStorage = await caches.open("search");
-      const responsedCache = await cacheStorage.match(URL);
-
-      try {
-        if (responsedCache) {
-          const res = await responsedCache.json();
-          setRecommendData(res);
-        } else {
-          const res = await axiosInstance.get(URL);
-          cacheStorage.put(URL, new Response(JSON.stringify(res.data)));
-          setRecommendData(res.data);
-        }
-      } catch (err) {
-        alert(err);
-      }
-    }
-  }, [keyWord]);
+function useDebounce<T>(value: T): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
-    const timerId = setTimeout(() => {
-      getRecommendData();
-    }, 300);
+    const timer = setTimeout(() => setDebouncedValue(value), 300);
 
-    return () => clearTimeout(timerId);
-  }, [getRecommendData, keyWord]);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value]);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setKeyWord(e.target.value);
-  };
-
-  return {
-    keyWord,
-    onChange,
-    recommendData,
-  };
-};
+  return debouncedValue;
+}
 
 export default useDebounce;

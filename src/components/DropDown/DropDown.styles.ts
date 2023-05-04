@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { focusType } from "../../types/focusType";
 
 export const DropDownContainer = styled.div`
   position: absolute;
@@ -18,9 +19,10 @@ export const Span = styled.span`
   font-size: 14px;
 `;
 
-export const ListContainer = styled.div`
+export const ListContainer = styled.div<focusType>`
   display: flex;
   width: 100%;
+  background-color: ${props => (props.focusIndex === props.index ? "#bfeff9" : "white")};
   &:hover {
     background-color: #bfeff9;
   }

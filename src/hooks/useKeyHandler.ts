@@ -1,12 +1,14 @@
-import { KeyboardEvent } from "react";
+import { KeyboardEvent, useState } from "react";
 
 const useKeyHandler = () => {
+  const [focusIndex, setFocusIndex] = useState(0);
+
   const handleArrowDown = () => {
-    console.log("handleArrowDown");
+    setFocusIndex(prevIndex => prevIndex + 1);
   };
 
   const handleArrowUp = () => {
-    console.log("handleArrowUp");
+    setFocusIndex(prevIndex => prevIndex - 1);
   };
 
   const handleEnter = () => {
@@ -30,6 +32,7 @@ const useKeyHandler = () => {
   };
 
   return {
+    focusIndex,
     handleArrowDown,
     handleArrowUp,
     handleEnter,

@@ -3,7 +3,13 @@ import { SearchDataType } from "../../types/data";
 import IconSearch from "../../assets/icon-search.svg";
 import * as St from "./DropDown.styles";
 
-const DropDown = ({ recommendData }: { recommendData: SearchDataType[] }) => {
+const DropDown = ({
+  recommendData,
+  focusIndex,
+}: {
+  recommendData: SearchDataType[];
+  focusIndex: number;
+}) => {
   return (
     <St.DropDownContainer>
       {recommendData.length === 0 ? (
@@ -11,8 +17,8 @@ const DropDown = ({ recommendData }: { recommendData: SearchDataType[] }) => {
       ) : (
         <>
           <St.Span>추천 검색어</St.Span>
-          {recommendData.map(data => (
-            <St.ListContainer key={data.id}>
+          {recommendData.map((data, index) => (
+            <St.ListContainer key={data.id} index={index} focusIndex={focusIndex}>
               <img src={IconSearch} alt="IconSearch" style={{ margin: "5px 0px 0px 40px" }} />
               <span
                 style={{

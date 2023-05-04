@@ -1,1 +1,9 @@
-# pre-onboarding-10th-2-2
+# 과제
+
+<br>
+
+Api 요청횟수 줄이는 건
+Debounce(0.3)초로 구현
+
+캐시 스토리지 사용 
+
