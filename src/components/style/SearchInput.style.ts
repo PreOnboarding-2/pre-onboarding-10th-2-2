@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Section = styled.section`
-  margin-top: 7rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 1rem;
 `;
 
 export const Form = styled.form`

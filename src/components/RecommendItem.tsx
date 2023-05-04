@@ -3,7 +3,7 @@ import useRecommned from "../hooks/useRecommend";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import SearchIcon from "./common/SearchIcon";
-import { Wrapper, TextWrapper, Text, BoldText } from "./Recommend.style";
+import { Wrapper, TextWrapper, Text, BoldText } from "./style/Recommend.style";
 
 const RecommendItem = () => {
   const { search } = useRecommned();

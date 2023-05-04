@@ -2,7 +2,7 @@ import React from "react";
 import useRecommned from "../hooks/useRecommend";
 import useSearchInput from "../hooks/useSearchInput";
 import SearchIcon from "./common/SearchIcon";
-import { Section, Form, Input, Button } from "./SearchInput.style";
+import { Section, Form, Input, Button } from "./style/SearchInput.style";
 
 const SearchInput = () => {
   const { input, changeHandler, submitHandler } = useSearchInput();

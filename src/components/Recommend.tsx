@@ -8,7 +8,7 @@ import {
   TextWrapper,
   BoldText,
   RecommendText,
-} from "./Recommend.style";
+} from "./style/Recommend.style";
 
 const Recommend = () => {
   const { search } = useRecommned();
