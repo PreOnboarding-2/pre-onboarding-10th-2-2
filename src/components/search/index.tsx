@@ -5,13 +5,12 @@ import SearchBar from "./searchbar";
 import SearchHistory from "./searchHistory";
 import SuggestedSearchGroup from "./suggestedSearchGroup";
 import * as S from "./search.styles";
-import { searchItem } from "./search.types";
+import { isVisible, searchItem } from "./search.types";
 import { moveDown, moveUp } from "../../utils";
 
-export default function Search() {
+export default function Search(prop: isVisible) {
   const [searchSuggestions, setSearchSuggestions] = useState<searchItem[]>([]);
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
   const searchRef = useRef<HTMLInputElement>(null);
@@ -28,9 +27,8 @@ export default function Search() {
   const onClickSearchKeyword = (keyword: string) => {
     if (searchRef.current !== null) {
       searchRef.current.value = keyword;
+      setSearchKeyword(keyword);
     }
-
-    onClickSubmitSearch();
   };
 
   const onKeyUpSearchKeyword = (event: KeyboardEvent, keyword: string) => {
@@ -40,7 +38,7 @@ export default function Search() {
 
     if (event.key === "Enter") {
       onClickSearchKeyword(keyword);
-      setIsVisible(false);
+      prop.setIsVisible(false);
     }
 
     if (event.key === "ArrowUp") {
@@ -88,16 +86,18 @@ export default function Search() {
         <span>국내 모든 임상시험 검색하고</span>
         <span>온라인으로 참여하기</span>
       </S.SearchTitle>
-      <SearchBar
-        setSearchSuggestions={setSearchSuggestions}
-        setSearchKeyword={setSearchKeyword}
-        isVisible={isVisible}
-        setIsVisible={setIsVisible}
-        searchRef={searchRef}
-        onClickSubmitSearch={onClickSubmitSearch}
-        onKeyUpSearchKeyword={onKeyUpSearchKeyword}
-      />
-      <S.SuggestionsWrapper isVisible={isVisible}>
+      <div onClick={event => event.stopPropagation()}>
+        <SearchBar
+          setSearchSuggestions={setSearchSuggestions}
+          setSearchKeyword={setSearchKeyword}
+          isVisible={prop.isVisible}
+          setIsVisible={prop.setIsVisible}
+          searchRef={searchRef}
+          onClickSubmitSearch={onClickSubmitSearch}
+          onKeyUpSearchKeyword={onKeyUpSearchKeyword}
+        />
+      </div>
+      <S.SuggestionsWrapper isVisible={prop.isVisible} onClick={event => event.stopPropagation()}>
         {searchSuggestions.length === 0 ? (
           <>
             <SearchHistory recentSearches={recentSearches} />

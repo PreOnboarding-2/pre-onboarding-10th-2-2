@@ -40,7 +40,7 @@ export default function SearchBar(props: ISearchBarProps) {
       }
 
       props.setSearchKeyword(keyword);
-      props.setSearchSuggestions(fetchData.slice(0, 7) || []);
+      props.setSearchSuggestions(fetchData?.slice(0, 7) || []);
     }, 300);
 
     setDebounce(time);
@@ -48,14 +48,6 @@ export default function SearchBar(props: ISearchBarProps) {
 
   const onFocusAutoCompleteSearch = () => {
     props.setIsVisible(true);
-  };
-
-  const onBlurAutoCompleteSearch = () => {
-    if (props.searchRef.current !== null) {
-      props.searchRef.current.value = "";
-    }
-    props.setSearchSuggestions([]);
-    props.setIsVisible(false);
   };
 
   return (
@@ -68,8 +60,7 @@ export default function SearchBar(props: ISearchBarProps) {
           placeholder={props.isVisible ? "" : "질환명을 입력해주세요."}
           ref={props.searchRef}
           onChange={onChangAutoCompleteSearch}
-          onFocus={onFocusAutoCompleteSearch}
-          onBlur={onBlurAutoCompleteSearch}
+          onClick={onFocusAutoCompleteSearch}
           onKeyUp={event =>
             props.onKeyUpSearchKeyword(
               event,

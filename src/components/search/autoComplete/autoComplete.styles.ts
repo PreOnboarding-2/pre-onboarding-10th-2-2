@@ -9,4 +9,5 @@ export const SuggestionTitle = styled.div`
 
 export const SuggestionKeywordWrapper = styled.div`
   padding: 10px 0;
+  cursor: pointer;
 `;
