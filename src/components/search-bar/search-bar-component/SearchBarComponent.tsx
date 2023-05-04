@@ -19,16 +19,17 @@ const SearchBarComponent = () => {
   return (
     <SearchBarRoundWrapper isFocus={isFocus}>
       <SearchBarInputWrapper>
-        <Input
-            type="search"
-            onChange={debouncedHandler}
-            onFocus={focusHandler}
-          />
+        <Input type="search" onChange={debouncedHandler} onFocus={focusHandler} />
       </SearchBarInputWrapper>
       <SearchButton>
         <SearchIcon $isbtn />
       </SearchButton>
-      <RecommendComponent searchList={data} isFocus={isFocus} inputText={inputText} isError={isError} />
+      <RecommendComponent
+        searchList={data}
+        isFocus={isFocus}
+        inputText={inputText}
+        isError={isError}
+      />
     </SearchBarRoundWrapper>
   );
 };

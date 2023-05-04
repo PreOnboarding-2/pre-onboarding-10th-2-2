@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 const useSearch = () => {
   const [isFocus, setIsFocus] = useState(false);
-  
+
   const closeRecommendHandler = ({ target }: MouseEvent) => {
-    if (!((target as HTMLElement).matches('input[type="search"]'))) setIsFocus(false);
+    if (!(target as HTMLElement).matches('input[type="search"]')) setIsFocus(false);
   };
 
   const focusHandler = () => setIsFocus(prev => !prev);
@@ -12,7 +12,7 @@ const useSearch = () => {
   return {
     closeRecommendHandler,
     isFocus,
-    focusHandler
+    focusHandler,
   };
 };
 

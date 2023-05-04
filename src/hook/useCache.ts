@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import ClinicApi from '../api/ClinicApi';
-import { CacheObject, Data } from '../types/cache/CacheObject';
+import React, { useState } from "react";
+import ClinicApi from "../api/ClinicApi";
+import { CacheObject, Data } from "../types/cache/CacheObject";
 
 const useCache = () => {
   const [data, setData] = useState<Data[]>([]);
   const [cache, setCache] = useState<{ [key: string]: CacheObject }>({});
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState("");
   const [isError, setIsError] = useState(false);
 
   const changeHandler = async ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
-    if (value === '') {
+    if (value === "") {
       setData([]);
       setIsError(true);
       return;
@@ -20,12 +20,11 @@ const useCache = () => {
     if (cachedData && Date.now() - cachedData.timestamp < 10000) {
       setData(cachedData.data);
       setIsError(cachedData.data.length === 0);
-    }
-    else {
+    } else {
       try {
         const newData = await ClinicApi.getRecommendations(value);
         setData(newData);
-        setCache({ ...cache, [value]: { data: newData, timestamp: Date.now()}});
+        setCache({ ...cache, [value]: { data: newData, timestamp: Date.now() } });
         setIsError(newData.length === 0);
       } catch {
         setIsError(true);
@@ -49,8 +48,8 @@ const useCache = () => {
     debouncedHandler,
     data,
     inputText,
-    isError
-  }
+    isError,
+  };
 };
 
 export default useCache;
