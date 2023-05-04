@@ -5,14 +5,22 @@ import SearchRecommend from "./SearchRecommend";
 import useSearch from "../hooks/useSearch";
 
 const SearchBody = () => {
-  const { input, handleInput, recommendList } = useSearch();
+  const { input, isFocus, handleInput, handleFocus, handleBlur, handleKeyDown, recommendList } =
+    useSearch();
 
   return (
     <>
       <InputContainer>
-        <InputBox value={input} onChange={handleInput} placeholder="질환명을 입력해 주세요." />
+        <InputBox
+          value={input}
+          onChange={handleInput}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          placeholder="질환명을 입력해 주세요."
+        />
       </InputContainer>
-      <SearchRecommend recommendList={recommendList} />
+      {isFocus && <SearchRecommend recommendList={recommendList} />}
     </>
   );
 };
