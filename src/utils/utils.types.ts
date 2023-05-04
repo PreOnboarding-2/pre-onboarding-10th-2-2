@@ -7,4 +7,5 @@ export interface IMoveProps {
   setSearchKeyword: (keyword: string) => void;
   searchRef: RefObject<HTMLInputElement>;
   numberRef: MutableRefObject<number>;
+  suggestionWrapperRef: RefObject<HTMLDivElement>;
 }

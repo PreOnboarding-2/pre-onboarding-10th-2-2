@@ -12,10 +12,11 @@ export const moveUp = (props: IMoveProps) => {
   if (props.searchRef.current === null) return;
 
   props.currentNumber--;
-
+  
   if (props.currentNumber < 0) {
     props.currentNumber = props.searchSuggestions.length - 1;
   }
+  (props.suggestionWrapperRef.current?.children[props.currentNumber] as HTMLDivElement).focus();
 
   props.searchRef.current.value = props.searchSuggestions[props.currentNumber].name;
   props.setSearchKeyword(props.searchSuggestions[props.currentNumber].name);
@@ -26,10 +27,11 @@ export const moveDown = (props: IMoveProps) => {
   if (props.searchRef.current === null) return;
 
   props.currentNumber++;
-
+  
   if (props.currentNumber > props.searchSuggestions.length - 1) {
     props.currentNumber = 0;
   }
+  (props.suggestionWrapperRef.current?.children[props.currentNumber] as HTMLDivElement).focus();
 
   props.searchRef.current.value = props.searchSuggestions[props.currentNumber].name;
   props.setSearchKeyword(props.searchSuggestions[props.currentNumber].name);

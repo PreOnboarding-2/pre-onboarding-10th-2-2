@@ -1,19 +1,33 @@
-import { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useCallback, useEffect } from "react";
 import fetchSearchSuggestions from "../../../api/fetchSearchSuggestions";
 import { BASE_URL, CACHE_STORAGE_NAME, DATE_NAME, RESOURCE_PATH } from "../../../constant";
 import { isCacheExpired } from "../../../utils";
 import * as S from "./searchbar.styles";
 import { ISearchBarProps } from "./searchbar.types";
+import { useDebounce } from "../../../hook/useDebounce";
+import SearchIcon from "../../../assets/SearchIcon";
 
 export default function SearchBar(props: ISearchBarProps) {
-  const [debounce, setDebounce] = useState(0);
+  const debounce = useDebounce();
+
+  const closeHandler = useCallback((e: MouseEvent) => {
+    const element = e.target as HTMLElement;
+    if (element.matches('input, .list-item') || element.closest('.list-item')) return;
+    if (props.searchRef.current !== null) {
+      props.searchRef.current.value = "";
+    }
+    props.setSearchSuggestions([]);
+    props.setIsVisible(false);
+  }, [props]);
+
+  useEffect(() => {
+    document.addEventListener('click', closeHandler);
+  }, [closeHandler]);
 
   const onChangAutoCompleteSearch = async (event: ChangeEvent<HTMLInputElement>) => {
     const keyword = event.target.value;
 
-    if (debounce) window.clearTimeout(debounce);
-
-    const time = window.setTimeout(async () => {
+    const time = async () => {
       let fetchData;
 
       if (keyword) {
@@ -41,21 +55,13 @@ export default function SearchBar(props: ISearchBarProps) {
 
       props.setSearchKeyword(keyword);
       props.setSearchSuggestions(fetchData.slice(0, 7) || []);
-    }, 300);
-
-    setDebounce(time);
-  };
+      props.setBoldText(keyword);
+    };
+    debounce(time);
+}
 
   const onFocusAutoCompleteSearch = () => {
     props.setIsVisible(true);
-  };
-
-  const onBlurAutoCompleteSearch = () => {
-    if (props.searchRef.current !== null) {
-      props.searchRef.current.value = "";
-    }
-    props.setSearchSuggestions([]);
-    props.setIsVisible(false);
   };
 
   return (
@@ -69,7 +75,6 @@ export default function SearchBar(props: ISearchBarProps) {
           ref={props.searchRef}
           onChange={onChangAutoCompleteSearch}
           onFocus={onFocusAutoCompleteSearch}
-          onBlur={onBlurAutoCompleteSearch}
           onKeyUp={event =>
             props.onKeyUpSearchKeyword(
               event,
@@ -79,7 +84,9 @@ export default function SearchBar(props: ISearchBarProps) {
         />
       </S.TextInputWrapper>
       <S.ButtonWrapper>
-        <S.SearchButton onClick={props.onClickSubmitSearch}>검색</S.SearchButton>
+        <S.SearchButton onClick={props.onClickSubmitSearch}>
+          <SearchIcon color="white" size={25} />
+        </S.SearchButton>
       </S.ButtonWrapper>
     </S.Container>
   );

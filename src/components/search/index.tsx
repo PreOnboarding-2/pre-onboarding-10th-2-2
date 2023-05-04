@@ -11,10 +11,12 @@ import { moveDown, moveUp } from "../../utils";
 export default function Search() {
   const [searchSuggestions, setSearchSuggestions] = useState<searchItem[]>([]);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [boldText, setBoldText] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
   const searchRef = useRef<HTMLInputElement>(null);
+  const suggestionWrapperRef = useRef<HTMLDivElement>(null);
   const numberRef = useRef(-1);
 
   useEffect(() => {
@@ -44,11 +46,11 @@ export default function Search() {
     }
 
     if (event.key === "ArrowUp") {
-      moveUp({ currentNumber, searchSuggestions, setSearchKeyword, searchRef, numberRef });
+      moveUp({ currentNumber, searchSuggestions, setSearchKeyword, searchRef, numberRef, suggestionWrapperRef });
     }
 
     if (event.key === "ArrowDown") {
-      moveDown({ currentNumber, searchSuggestions, setSearchKeyword, searchRef, numberRef });
+      moveDown({ currentNumber, searchSuggestions, setSearchKeyword, searchRef, numberRef, suggestionWrapperRef });
     }
   };
 
@@ -96,6 +98,7 @@ export default function Search() {
         searchRef={searchRef}
         onClickSubmitSearch={onClickSubmitSearch}
         onKeyUpSearchKeyword={onKeyUpSearchKeyword}
+        setBoldText={setBoldText}
       />
       <S.SuggestionsWrapper isVisible={isVisible}>
         {searchSuggestions.length === 0 ? (
@@ -110,6 +113,9 @@ export default function Search() {
               searchSuggestions={searchSuggestions}
               onClickSearchKeyword={onClickSearchKeyword}
               onKeyUpSearchKeyword={onKeyUpSearchKeyword}
+              suggestionWrapperRef={suggestionWrapperRef}
+              searchRef={searchRef}
+              boldText={boldText}
             />
           </>
         )}
