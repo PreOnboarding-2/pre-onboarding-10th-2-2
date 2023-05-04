@@ -32,9 +32,9 @@ const SearchArea = () => {
 
     const cachedResult = localStorage.getItem(keyword);
     if (cachedResult) {
-      const { timestamp, data } = JSON.parse(cachedResult);
+      const { timestamp, resultList } = JSON.parse(cachedResult);
       if (Date.now() - timestamp < expTime) {
-        setList(data);
+        setList(resultList);
         return;
       }
       localStorage.removeItem(keyword);
@@ -43,8 +43,10 @@ const SearchArea = () => {
     const fetchData = async () => {
       const response = await API.get(`/?name=${keyword}`);
       const resultList = response.data.slice(0, 7);
+      const timestamp = Date.now();
+      const data = { timestamp, resultList };
+      localStorage.setItem(keyword, JSON.stringify(data));
       setList(resultList);
-      localStorage.setItem(keyword, JSON.stringify(resultList));
     };
 
     fetchData();
