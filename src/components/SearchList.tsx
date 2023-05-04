@@ -7,7 +7,6 @@ import {
 } from "./styles/searchList.style";
 import { Item } from "./SearchArea";
 import SearchIcon from "./SearchIcon";
-import React from "react";
 
 interface SearchListProps {
   list: Item[];
