@@ -1,16 +1,16 @@
-import { Data } from "../cache/CacheObject"
+import { Data } from "../cache/CacheObject";
 import { CommonProps, FocusProps } from "../common/CommonProps";
 
 export type RecommendProps = {
-  searchList: Data[]
+  searchList: Data[];
 };
 
 export type InputTextType = {
-  inputText: string
+  inputText: string;
 };
 
 export interface RecommendComponentProps extends RecommendProps, FocusProps, InputTextType {
-  isError: boolean
+  isError: boolean;
 }
 
 export type RecommendItemProps = CommonProps & InputTextType;

@@ -4,8 +4,8 @@ import { FocusProps } from "../../../types/common/CommonProps";
 const SearchBarRoundWrapperUI = styled.div<FocusProps>`
   border-radius: 42px;
   border: 2px solid;
-  border-color: ${({ isFocus }) => isFocus ? '#007BE9' : '#FFFFFF'};
-  background-color: #FFFFFF;
+  border-color: ${({ isFocus }) => (isFocus ? "#007BE9" : "#FFFFFF")};
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   padding: 2px 10px;

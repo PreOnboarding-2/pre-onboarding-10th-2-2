@@ -7,7 +7,7 @@ const RecommendItemUI = styled.p`
 
   &:hover {
     cursor: pointer;
-    background-color: #D3D3D3;
+    background-color: #d3d3d3;
   }
 `;
 

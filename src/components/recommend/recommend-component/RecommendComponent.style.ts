@@ -9,5 +9,5 @@ export const RecommendWrapper = styled.div<FocusProps>`
   position: absolute;
   top: 80px;
   left: 0;
-  display: ${({ isFocus }) => isFocus ? 'block' : 'none'};
+  display: ${({ isFocus }) => (isFocus ? "block" : "none")};
 `;

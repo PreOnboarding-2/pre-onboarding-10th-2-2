@@ -4,7 +4,7 @@ import Button from "../../common/button/Button";
 const SearchButtonUI = styled(Button)`
   width: 48px;
   height: 48px;
-  background-color: #007BE9;
+  background-color: #007be9;
   border-radius: 100%;
 `;
 
