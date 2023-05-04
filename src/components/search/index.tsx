@@ -110,6 +110,7 @@ export default function Search() {
               searchSuggestions={searchSuggestions}
               onClickSearchKeyword={onClickSearchKeyword}
               onKeyUpSearchKeyword={onKeyUpSearchKeyword}
+              searchKeyword={searchKeyword}
             />
           </>
         )}

@@ -16,3 +16,7 @@ export const SuggestionKeywordWrapper = styled.button`
   flex-direction: column;
   font-size: 1rem;
 `;
+
+export const SearchKeyword = styled.span`
+  font-weight: bold;
+`;
