@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
     body{
         padding: 0;
         margin: 0;
+        background-color: #cae9ff;
         font-family: 'Noto Sans KR', sans-serif;
     };
     button{

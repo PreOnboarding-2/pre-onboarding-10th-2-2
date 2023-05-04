@@ -1,15 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-import SearchResult from "./SearchResult";
+import SearchRecommend from "./SearchRecommend";
+import useSearch from "../hooks/useSearch";
 
 const SearchBody = () => {
+  const { input, handleInput, recommendList } = useSearch();
+
   return (
     <>
       <InputContainer>
-        <InputBox placeholder="질환명을 입력해 주세요." />
+        <InputBox value={input} onChange={handleInput} placeholder="질환명을 입력해 주세요." />
       </InputContainer>
-      <SearchResult />
+      <SearchRecommend recommendList={recommendList} />
     </>
   );
 };
