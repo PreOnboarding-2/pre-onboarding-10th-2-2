@@ -9,7 +9,7 @@ const ClinicApi = () => {
   };
 
   return {
-    getRecommendations
+    getRecommendations,
   };
 };
 
