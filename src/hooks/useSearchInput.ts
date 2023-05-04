@@ -48,7 +48,7 @@ const useSearchInput = () => {
         getRecommendHandler();
       }, 300);
     } else {
-      dispatch(init())
+      dispatch(init());
     }
     return () => clearTimeout(timer);
   }, [input, getRecommendHandler, dispatch]);
