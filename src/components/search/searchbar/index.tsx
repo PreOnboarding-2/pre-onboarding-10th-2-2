@@ -52,10 +52,6 @@ export default function SearchBar(props: ISearchBarProps) {
   };
 
   const onBlurAutoCompleteSearch = () => {
-    if (props.searchRef.current !== null) {
-      props.searchRef.current.value = "";
-    }
-    props.setSearchSuggestions([]);
     props.setIsVisible(false);
   };
 
@@ -80,7 +76,7 @@ export default function SearchBar(props: ISearchBarProps) {
         />
       </S.TextInputWrapper>
       <S.ButtonWrapper>
-        <S.SearchButton onClick={props.onClickSubmitSearch}>
+        <S.SearchButton onClick={props.onClickSubmitSearch} onFocus={onFocusAutoCompleteSearch}>
           <SearchIcon color="#FFFFFF" viewBox="-4 -5 24 24" size={28} />
         </S.SearchButton>
       </S.ButtonWrapper>

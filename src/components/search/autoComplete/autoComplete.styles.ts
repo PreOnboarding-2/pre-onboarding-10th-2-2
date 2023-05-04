@@ -7,6 +7,12 @@ export const SuggestionTitle = styled.div`
   color: #767f86;
 `;
 
-export const SuggestionKeywordWrapper = styled.div`
+export const SuggestionKeywordWrapper = styled.button`
   padding: 10px 0;
+  border: 0;
+  background-color: inherit;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
 `;
