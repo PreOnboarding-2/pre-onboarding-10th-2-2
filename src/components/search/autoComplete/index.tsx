@@ -1,5 +1,6 @@
 import * as S from "./autoComplete.styles";
 import { IAutoCompleteProps } from "./autoComplete.types";
+import SearchIcon from "../../common/SearchIcon";
 
 export default function AutoComplete(props: IAutoCompleteProps) {
   return (
@@ -11,7 +12,10 @@ export default function AutoComplete(props: IAutoCompleteProps) {
           onClick={() => props.onClickSearchKeyword(keyword.name)}
           onKeyUp={event => props.onKeyUpSearchKeyword(event, keyword.name)}
         >
-          <div>{keyword.name}</div>
+          <div>
+            <SearchIcon color="#BABABA" viewBox="0 -10 26 26" size={26} />
+            {keyword.name}
+          </div>
         </S.SuggestionKeywordWrapper>
       ))}
     </>

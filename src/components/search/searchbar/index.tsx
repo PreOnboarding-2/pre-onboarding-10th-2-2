@@ -4,6 +4,7 @@ import { BASE_URL, CACHE_STORAGE_NAME, DATE_NAME, RESOURCE_PATH } from "../../..
 import { isCacheExpired } from "../../../utils";
 import * as S from "./searchbar.styles";
 import { ISearchBarProps } from "./searchbar.types";
+import SearchIcon from "../../common/SearchIcon";
 
 export default function SearchBar(props: ISearchBarProps) {
   const [debounce, setDebounce] = useState(0);
@@ -79,7 +80,9 @@ export default function SearchBar(props: ISearchBarProps) {
         />
       </S.TextInputWrapper>
       <S.ButtonWrapper>
-        <S.SearchButton onClick={props.onClickSubmitSearch}>검색</S.SearchButton>
+        <S.SearchButton onClick={props.onClickSubmitSearch}>
+          <SearchIcon color="#FFFFFF" viewBox="-4 -5 24 24" size={28} />
+        </S.SearchButton>
       </S.ButtonWrapper>
     </S.Container>
   );

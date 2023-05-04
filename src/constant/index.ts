@@ -4,3 +4,5 @@ export const DATE_NAME = "fetch-date";
 export const MAX_NUMBER = 7;
 export const RESOURCE_PATH = "/api/v1/search-conditions";
 export const BASE_URL = "https://api.clinicaltrialskorea.com";
+export const EXPIRE_TIME = 60000;
+export const DELAY_TIME = 300;
