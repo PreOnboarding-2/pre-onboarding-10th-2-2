@@ -10,4 +10,5 @@ export interface FocusProps extends CommonProps {
 
 export type IconProps = {
   $isbtn: boolean;
+  $input?: boolean;
 };

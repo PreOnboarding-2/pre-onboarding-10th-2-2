@@ -19,7 +19,8 @@ const SearchBarComponent = () => {
   return (
     <SearchBarRoundWrapper isFocus={isFocus}>
       <SearchBarInputWrapper>
-        <Input type="search" onChange={debouncedHandler} onFocus={focusHandler} />
+        <SearchIcon $isbtn={false} $input />
+        <Input type="search" onChange={debouncedHandler} onFocus={focusHandler} placeholder="질환명을 검색해 주세요." />
       </SearchBarInputWrapper>
       <SearchButton>
         <SearchIcon $isbtn />

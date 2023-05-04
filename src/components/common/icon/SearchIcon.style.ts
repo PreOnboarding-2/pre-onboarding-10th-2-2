@@ -10,6 +10,10 @@ const SearchIconUI = styled(Search)<IconProps>`
     css`
       margin-right: 10px;
     `};
+  ${({ $input }) => $input && css`
+    position: absolute;
+    left: 5px;
+  `}
 `;
 
 export default SearchIconUI;

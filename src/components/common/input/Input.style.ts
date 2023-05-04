@@ -5,6 +5,7 @@ const InputUI = styled.input`
   height: 22px;
   width: 100%;
   outline: none;
+  text-indent: 10px;
 `;
 
 export default InputUI;
