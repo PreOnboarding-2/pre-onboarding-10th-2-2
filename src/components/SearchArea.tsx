@@ -21,6 +21,10 @@ const SearchArea = () => {
   const debouncedValue = useDebounce(value, delaySec);
 
   useEffect(() => {
+    if (!value) return setList([]);
+  }, [value]);
+
+  useEffect(() => {
     const keyword = debouncedValue?.trim();
     if (!keyword) {
       return;
