@@ -1,5 +1,4 @@
 import axios from "axios";
-// import customAxios from "../lib/customAxios"
 
 const ClinicApi = () => {
   const getRecommendations = async (value: string) => {

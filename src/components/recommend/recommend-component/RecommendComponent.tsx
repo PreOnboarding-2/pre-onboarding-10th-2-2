@@ -10,9 +10,9 @@ const RecommendComponent = ({
   inputText,
   isError,
 }: RecommendComponentProps) => {
-  const isEmpty = inputText === '';
-  const titleText = isEmpty || isError ? '검색어 없음' : '추천 검색어';
-  
+  const isEmpty = inputText === "";
+  const titleText = isEmpty || isError ? "검색어 없음" : "추천 검색어";
+
   return (
     <RecommendWrapper isFocus={isFocus}>
       <RecommendTitle>{titleText}</RecommendTitle>
