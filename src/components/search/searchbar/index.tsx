@@ -79,10 +79,12 @@ export default function SearchBar(props: ISearchBarProps) {
           }
         />
       </S.TextInputWrapper>
-      <S.SearchButton onClick={props.onClickSubmitSearch}>
-        <S.AltText>검색</S.AltText>
-        <SearchIcon color="#FFFFFF" viewBox="-4 -5 24 24" size={28} />
-      </S.SearchButton>
+      <S.ButtonWrapper>
+        <S.SearchButton onClick={props.onClickSubmitSearch}>
+          <S.AltText>검색</S.AltText>
+          <SearchIcon color="#FFFFFF" viewBox="-4 -5 24 24" size={28} />
+        </S.SearchButton>
+      </S.ButtonWrapper>
     </S.Container>
   );
 }
