@@ -1,6 +1,13 @@
+import { useState } from "react";
 import { ChangeEvent } from "react";
 import fetchSearchSuggestions from "../../../api/fetchSearchSuggestions";
-import { BASE_URL, CACHE_STORAGE_NAME, DATE_NAME, RESOURCE_PATH } from "../../../constant";
+import {
+  BASE_URL,
+  CACHE_STORAGE_NAME,
+  DATE_NAME,
+  DELAY_TIME,
+  RESOURCE_PATH,
+} from "../../../constant";
 import { isCacheExpired } from "../../../utils";
 import * as S from "./searchbar.styles";
 import { ISearchBarProps } from "./searchbar.types";
@@ -8,15 +15,24 @@ import SearchIcon from "../../common/SearchIcon";
 import { Item } from "./searchbar.types";
 
 export default function SearchBar(props: ISearchBarProps) {
+  const [debounce, setDebounce] = useState(0);
+
   const onChangAutoCompleteSearch = async (event: ChangeEvent<HTMLInputElement>) => {
     const keyword = event.target.value;
-    let fetchData: Array<Item> = [];
 
-    if (keyword) {
-      fetchData = await onFetchData(keyword);
-    }
-    props.setSearchKeyword(keyword);
-    props.setSearchSuggestions(fetchData.slice(0, 7) || []);
+    if (debounce) window.clearTimeout(debounce);
+
+    const time = window.setTimeout(async () => {
+      let fetchData: Array<Item> = [];
+
+      if (keyword) {
+        fetchData = await onFetchData(keyword);
+      }
+      props.setSearchKeyword(keyword);
+      props.setSearchSuggestions(fetchData.slice(0, 7) || []);
+    }, DELAY_TIME);
+
+    setDebounce(time);
   };
 
   const onFetchData = async (keyword: string): Promise<Array<Item>> => {
