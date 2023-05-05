@@ -84,7 +84,7 @@ export default function SearchBar(props: ISearchBarProps) {
           src={IconSearch}
           alt="icon-search"
           onClick={props.onClickSubmitSearch}
-          style={{ width: "30px", height: "30px" }}
+          style={{ width: "25px", height: "25px" }}
         />
       </S.ButtonWrapper>
     </S.Container>

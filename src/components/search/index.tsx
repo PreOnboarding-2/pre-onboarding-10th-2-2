@@ -107,6 +107,7 @@ export default function Search() {
           <>
             <S.SearchKeyword>{searchKeyword}</S.SearchKeyword>
             <AutoComplete
+              searchKeyword={searchKeyword}
               searchSuggestions={searchSuggestions}
               onClickSearchKeyword={onClickSearchKeyword}
               onKeyUpSearchKeyword={onKeyUpSearchKeyword}
