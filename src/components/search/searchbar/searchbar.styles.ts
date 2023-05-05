@@ -11,6 +11,7 @@ export const Container = styled.div`
   background-color: white;
   border-radius: 42px;
   border: ${(props: IProps) => (props.isVisible ? "2px solid #007be9" : "2px solid white")};
+  margin: 0 auto;
 `;
 
 export const TextInputWrapper = styled.div`

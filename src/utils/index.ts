@@ -12,7 +12,7 @@ export const moveUp = (props: IMoveProps) => {
   if (props.searchRef.current === null) return;
 
   props.currentNumber--;
-  
+
   if (props.currentNumber < 0) {
     props.currentNumber = props.searchSuggestions.length - 1;
   }
@@ -27,7 +27,7 @@ export const moveDown = (props: IMoveProps) => {
   if (props.searchRef.current === null) return;
 
   props.currentNumber++;
-  
+
   if (props.currentNumber > props.searchSuggestions.length - 1) {
     props.currentNumber = 0;
   }

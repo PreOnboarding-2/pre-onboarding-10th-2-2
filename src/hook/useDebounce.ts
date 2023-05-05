@@ -5,7 +5,7 @@ export const useDebounce = () => {
 
   return (fnc: any) => {
     if (debounce) window.clearTimeout(debounce);
-  
+
     setDebounce(window.setTimeout(fnc, 300));
-  }
+  };
 };

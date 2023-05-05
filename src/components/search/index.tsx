@@ -7,6 +7,7 @@ import SuggestedSearchGroup from "./suggestedSearchGroup";
 import * as S from "./search.styles";
 import { searchItem } from "./search.types";
 import { moveDown, moveUp } from "../../utils";
+import useToggle from "../../hook/useToggle";
 
 export default function Search() {
   const [searchSuggestions, setSearchSuggestions] = useState<searchItem[]>([]);
@@ -15,9 +16,9 @@ export default function Search() {
   const [isVisible, setIsVisible] = useState(false);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
 
-  const searchRef = useRef<HTMLInputElement>(null);
   const suggestionWrapperRef = useRef<HTMLDivElement>(null);
   const numberRef = useRef(-1);
+  const { searchRef, closeHandler } = useToggle({ setSearchSuggestions, setIsVisible })
 
   useEffect(() => {
     const keywords = sessionStorage.getItem(SESSION_STORAGE_KEY);
@@ -31,6 +32,7 @@ export default function Search() {
     if (searchRef.current !== null) {
       searchRef.current.value = keyword;
     }
+    setIsVisible(false);
 
     onClickSubmitSearch();
   };
@@ -45,12 +47,26 @@ export default function Search() {
       setIsVisible(false);
     }
 
-    if (event.key === "ArrowUp") {
-      moveUp({ currentNumber, searchSuggestions, setSearchKeyword, searchRef, numberRef, suggestionWrapperRef });
+    if (event.key === "ArrowUp" || event.shiftKey && event.key === 'Tab') {
+      moveUp({
+        currentNumber,
+        searchSuggestions,
+        setSearchKeyword,
+        searchRef,
+        numberRef,
+        suggestionWrapperRef,
+      });
     }
 
-    if (event.key === "ArrowDown") {
-      moveDown({ currentNumber, searchSuggestions, setSearchKeyword, searchRef, numberRef, suggestionWrapperRef });
+    if (event.key === "ArrowDown" || event.key === "Tab") {
+      moveDown({
+        currentNumber,
+        searchSuggestions,
+        setSearchKeyword,
+        searchRef,
+        numberRef,
+        suggestionWrapperRef,
+      });
     }
   };
 
@@ -85,7 +101,7 @@ export default function Search() {
   };
 
   return (
-    <section>
+    <S.SearchSection onClick={closeHandler}>
       <S.SearchTitle>
         <span>국내 모든 임상시험 검색하고</span>
         <span>온라인으로 참여하기</span>
@@ -120,6 +136,6 @@ export default function Search() {
           </>
         )}
       </S.SuggestionsWrapper>
-    </section>
+    </S.SearchSection>
   );
 }

@@ -34,4 +34,3 @@ export const NormalText = styled.span`
   text-indent: 0;
   white-space: pre;
 `;
-

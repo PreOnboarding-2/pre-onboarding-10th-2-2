@@ -17,10 +17,11 @@ interface IProps {
 
 export const SuggestionsWrapper = styled.div`
   display: ${(props: IProps) => (props.isVisible ? "" : "none")};
-  margin-top: 10px;
+  margin: 10px auto 0;
   padding: 20px;
   border-radius: 20px;
   background-color: white;
+  width: 450px;
 `;
 
 export const SuggestionTitle = styled.div`
@@ -34,4 +35,9 @@ export const SearchKeyword = styled.div`
   padding-top: 10px;
   font-size: 1.125rem;
   font-weight: 700;
+`;
+
+export const SearchSection = styled.section`
+  width: 100%;
+  height: 100vh;
 `;
