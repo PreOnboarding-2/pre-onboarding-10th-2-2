@@ -1,8 +1,11 @@
 import SearchIcon from "../../commons/icons/search";
 import * as S from "./autoComplete.styles";
+import SearchIcon from "../../common/SearchIcon";
 import { IAutoCompleteProps } from "./autoComplete.types";
 
 export default function AutoComplete(props: IAutoCompleteProps) {
+  const dataLength = props.searchSuggestions.length;
+
   return (
     <>
       <S.SuggestionTitle>추천 검색어</S.SuggestionTitle>

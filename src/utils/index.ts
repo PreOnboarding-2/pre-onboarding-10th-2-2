@@ -1,5 +1,8 @@
 import { EXPIRED_TIME } from "../constant";
 import { IMoveProps } from "./utils.types";
+import { CacheConfigType } from "./utils.types";
+import { DATE_NAME } from "../constant";
+import { CACHE_EXPIRE_TIME } from "../constant";
 
 export const isCacheExpired = (cacheResponse: Response) => {
   const fetchDate = new Date(cacheResponse.headers.get("fetch-date")!).getTime();
