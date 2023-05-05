@@ -40,7 +40,7 @@ export default function SearchBar(props: ISearchBarProps) {
       }
 
       props.setSearchKeyword(keyword);
-      props.setSearchSuggestions(fetchData.slice(0, 7) || []);
+      props.setSearchSuggestions(fetchData ? fetchData.slice(0, 7) : []);
     }, 300);
 
     setDebounce(time);
