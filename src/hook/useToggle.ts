@@ -3,7 +3,7 @@ import { searchItem } from "../components/search/search.types";
 
 type ToggleProps = {
   setSearchSuggestions: Dispatch<SetStateAction<searchItem[]>>;
-  setIsVisible: Dispatch<SetStateAction<boolean>>
+  setIsVisible: Dispatch<SetStateAction<boolean>>;
 };
 
 const useToggle = ({ setSearchSuggestions, setIsVisible }: ToggleProps) => {
@@ -27,8 +27,8 @@ const useToggle = ({ setSearchSuggestions, setIsVisible }: ToggleProps) => {
   // }, [closeHandler]);
   return {
     closeHandler,
-    searchRef
-  }
+    searchRef,
+  };
 };
 
-export default useToggle
+export default useToggle;

@@ -18,7 +18,7 @@ export default function Search() {
 
   const suggestionWrapperRef = useRef<HTMLDivElement>(null);
   const numberRef = useRef(-1);
-  const { searchRef, closeHandler } = useToggle({ setSearchSuggestions, setIsVisible })
+  const { searchRef, closeHandler } = useToggle({ setSearchSuggestions, setIsVisible });
 
   useEffect(() => {
     const keywords = sessionStorage.getItem(SESSION_STORAGE_KEY);
@@ -47,7 +47,7 @@ export default function Search() {
       setIsVisible(false);
     }
 
-    if (event.key === "ArrowUp" || event.shiftKey && event.key === 'Tab') {
+    if (event.key === "ArrowUp" || (event.shiftKey && event.key === "Tab")) {
       moveUp({
         currentNumber,
         searchSuggestions,
