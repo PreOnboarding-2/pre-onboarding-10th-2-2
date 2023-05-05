@@ -43,3 +43,8 @@ export const SearchButton = styled.button`
   background-color: #007be9;
   cursor: pointer;
 `;
+
+export const AltText = styled.span`
+  position: absolute;
+  opacity: 0;
+`;

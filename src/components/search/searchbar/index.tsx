@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import fetchSearchSuggestions from "../../../api/fetchSearchSuggestions";
 import { BASE_URL, CACHE_STORAGE_NAME, DATE_NAME, RESOURCE_PATH } from "../../../constant";
 import { isCacheExpired } from "../../../utils";
+import SearchIcon from "../../commons/icons/search";
 import * as S from "./searchbar.styles";
 import { ISearchBarProps } from "./searchbar.types";
 
@@ -78,9 +79,10 @@ export default function SearchBar(props: ISearchBarProps) {
           }
         />
       </S.TextInputWrapper>
-      <S.ButtonWrapper>
-        <S.SearchButton onClick={props.onClickSubmitSearch}>검색</S.SearchButton>
-      </S.ButtonWrapper>
+      <S.SearchButton onClick={props.onClickSubmitSearch}>
+        <S.AltText>검색</S.AltText>
+        <SearchIcon color="#FFFFFF" viewBox="-4 -5 24 24" size={28} />
+      </S.SearchButton>
     </S.Container>
   );
 }
