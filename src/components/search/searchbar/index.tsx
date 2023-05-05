@@ -1,50 +1,47 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import fetchSearchSuggestions from "../../../api/fetchSearchSuggestions";
 import { BASE_URL, CACHE_STORAGE_NAME, DATE_NAME, RESOURCE_PATH } from "../../../constant";
 import { isCacheExpired } from "../../../utils";
 import * as S from "./searchbar.styles";
 import { ISearchBarProps } from "./searchbar.types";
 import SearchIcon from "../../common/SearchIcon";
+import { Item } from "./searchbar.types";
 
 export default function SearchBar(props: ISearchBarProps) {
-  const [debounce, setDebounce] = useState(0);
-
   const onChangAutoCompleteSearch = async (event: ChangeEvent<HTMLInputElement>) => {
     const keyword = event.target.value;
+    let fetchData: Array<Item> = [];
 
-    if (debounce) window.clearTimeout(debounce);
+    if (keyword) {
+      fetchData = await onFetchData(keyword);
+    }
+    props.setSearchKeyword(keyword);
+    props.setSearchSuggestions(fetchData.slice(0, 7) || []);
+  };
 
-    const time = window.setTimeout(async () => {
-      let fetchData;
+  const onFetchData = async (keyword: string): Promise<Array<Item>> => {
+    let fetchData;
+    const cache = await caches.open(CACHE_STORAGE_NAME);
+    const cacheResponse = await cache.match(`${BASE_URL}${RESOURCE_PATH}/?name=${keyword}`);
 
-      if (keyword) {
-        const cache = await caches.open(CACHE_STORAGE_NAME);
-        const cacheResponse = await cache.match(`${BASE_URL}${RESOURCE_PATH}/?name=${keyword}`);
+    if (cacheResponse && !isCacheExpired(cacheResponse)) {
+      fetchData = await cacheResponse.json();
+    } else {
+      fetchData = await fetchSearchSuggestions(keyword);
 
-        if (cacheResponse && !isCacheExpired(cacheResponse)) {
-          fetchData = await cacheResponse.json();
-        } else {
-          fetchData = await fetchSearchSuggestions(keyword);
+      let newHeaders = new Headers(fetchData.headers);
+      newHeaders.append(DATE_NAME, new Date().toISOString());
 
-          let newHeaders = new Headers(fetchData.headers);
-          newHeaders.append(DATE_NAME, new Date().toISOString());
+      await cache.put(
+        `${BASE_URL}${RESOURCE_PATH}/?name=${keyword}`,
+        new Response(JSON.stringify(fetchData), {
+          headers: newHeaders,
+        })
+      );
+    }
 
-          await cache.put(
-            `${BASE_URL}${RESOURCE_PATH}/?name=${keyword}`,
-            new Response(JSON.stringify(fetchData), {
-              headers: newHeaders,
-            })
-          );
-        }
-
-        console.info("calling api");
-      }
-
-      props.setSearchKeyword(keyword);
-      props.setSearchSuggestions(fetchData.slice(0, 7) || []);
-    }, 300);
-
-    setDebounce(time);
+    console.info("calling api");
+    return fetchData;
   };
 
   const onFocusAutoCompleteSearch = () => {

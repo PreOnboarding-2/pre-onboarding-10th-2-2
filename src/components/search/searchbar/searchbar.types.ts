@@ -14,3 +14,8 @@ export interface ISearchBarProps {
   onClickSubmitSearch: () => void;
   onKeyUpSearchKeyword: (event: KeyboardEvent, keyword: string) => void;
 }
+
+export interface Item {
+  name: string;
+  id: number;
+}
