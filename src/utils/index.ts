@@ -1,11 +1,11 @@
+import { EXPIRED_TIME } from "../constant";
 import { IMoveProps } from "./utils.types";
 
 export const isCacheExpired = (cacheResponse: Response) => {
-  const ONE_HOUR = 60 * 60 * 1000;
   const fetchDate = new Date(cacheResponse.headers.get("fetch-date")!).getTime();
   const today = new Date().getTime();
 
-  return today - fetchDate > ONE_HOUR;
+  return today - fetchDate > EXPIRED_TIME;
 };
 
 export const moveUp = (props: IMoveProps) => {
