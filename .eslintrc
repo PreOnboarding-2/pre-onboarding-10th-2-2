@@ -1,4 +1,7 @@
 {
+  "globals": {
+    "NodeJS": true
+  },
   "extends": ["react-app", "eslint:recommended", "prettier"],
   "rules": {
     "no-var": "error",
