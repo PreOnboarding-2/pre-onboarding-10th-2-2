@@ -1,38 +1,48 @@
-import { useState } from "react";
-import { ChangeEvent } from "react";
+import React, { useCallback, useState } from "react";
 import fetchSearchSuggestions from "../../../api/fetchSearchSuggestions";
-import {
-  BASE_URL,
-  CACHE_STORAGE_NAME,
-  DATE_NAME,
-  DELAY_TIME,
-  RESOURCE_PATH,
-} from "../../../constant";
-import { isCacheExpired } from "../../../utils";
+import { BASE_URL, CACHE_STORAGE_NAME, RESOURCE_PATH } from "../../../constant";
 import * as S from "./searchbar.styles";
-import { ISearchBarProps } from "./searchbar.types";
 import SearchIcon from "../../common/SearchIcon";
-import { Item } from "./searchbar.types";
+import { ISearchBarProps } from "./searchbar.types";
+import useDebounce from "../../../hooks/useDebounce";
+import { handleCache } from "../../../utils";
+import { DEBOUNCE_TIME } from "../../../constant";
 
-export default function SearchBar(props: ISearchBarProps) {
-  const [debounce, setDebounce] = useState(0);
+export default function SearchBar({
+  isVisible,
+  setSearchSuggestions,
+  setSearchKeyword,
+  setIsVisible,
+  searchRef,
+  onKeyUpSearchKeyword,
+}: ISearchBarProps) {
+  const [inpValue, setInpValue] = useState("");
 
-  const onChangAutoCompleteSearch = async (event: ChangeEvent<HTMLInputElement>) => {
-    const keyword = event.target.value;
+  const searchAutoComplete = useCallback(
+    async (value: any) => {
+      let fetchData;
 
-    if (debounce) window.clearTimeout(debounce);
-
-    const time = window.setTimeout(async () => {
-      let fetchData: Array<Item> = [];
-
-      if (keyword) {
-        fetchData = await onFetchData(keyword);
+      if (value) {
+        fetchData = await handleCache(
+          {
+            storageName: CACHE_STORAGE_NAME,
+            url: `${BASE_URL}${RESOURCE_PATH}/?name=${value}`,
+          },
+          () => fetchSearchSuggestions(value)
+        );
       }
-      props.setSearchKeyword(keyword);
-      props.setSearchSuggestions(fetchData.slice(0, 7) || []);
-    }, DELAY_TIME);
 
-    setDebounce(time);
+      setSearchKeyword(value);
+      setSearchSuggestions(fetchData?.slice(0, 7) || []);
+    },
+    [setSearchKeyword, setSearchSuggestions]
+  );
+
+  useDebounce(inpValue, searchAutoComplete, DEBOUNCE_TIME);
+
+  const onInpChange = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    setInpValue(target.value);
   };
 
   const onFetchData = async (keyword: string): Promise<Array<Item>> => {
@@ -61,42 +71,32 @@ export default function SearchBar(props: ISearchBarProps) {
   };
 
   const onFocusAutoCompleteSearch = () => {
-    props.setIsVisible(true);
+    setIsVisible(true);
   };
 
-  const onBlurAutoCompleteSearch = () => {
-    if (props.searchRef.current !== null) {
-      props.searchRef.current.value = "";
-    }
-    props.setSearchSuggestions([]);
-    props.setIsVisible(false);
-  };
-
+  // TODO: HTML 태그 구조 정리하기
   return (
-    <S.Container isVisible={props.isVisible}>
+    <S.Container isVisible={isVisible}>
       <S.TextInputWrapper>
         <label htmlFor="search_bar_main"></label>
+        {!isVisible && <SearchIcon color="#BABABA" viewBox="0 -5 26 26" size={26} />}
         <S.TextInput
           type="text"
           id="search_bar_main"
-          placeholder={props.isVisible ? "" : "질환명을 입력해주세요."}
-          ref={props.searchRef}
-          onChange={onChangAutoCompleteSearch}
+          value={inpValue}
+          placeholder={isVisible ? "" : "질환명을 입력해주세요."}
+          ref={searchRef}
+          onChange={onInpChange}
           onFocus={onFocusAutoCompleteSearch}
-          onBlur={onBlurAutoCompleteSearch}
           onKeyUp={event =>
-            props.onKeyUpSearchKeyword(
-              event,
-              props.searchRef.current ? props.searchRef.current.value : ""
-            )
+            onKeyUpSearchKeyword(event, searchRef.current ? searchRef.current.value : "")
           }
         />
       </S.TextInputWrapper>
-      <S.ButtonWrapper>
-        <S.SearchButton onClick={props.onClickSubmitSearch}>
-          <SearchIcon color="#FFFFFF" viewBox="-4 -5 24 24" size={28} />
-        </S.SearchButton>
-      </S.ButtonWrapper>
+      <S.SearchButton>
+        <span className="ir">검색</span>
+        <SearchIcon color="#FFFFFF" viewBox="-4 -5 24 24" size={28} />
+      </S.SearchButton>
     </S.Container>
   );
 }

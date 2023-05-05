@@ -11,6 +11,7 @@ const SearchIcon = (props: Props) => {
 
   return (
     <svg
+      role="presentation"
       viewBox={viewBox}
       width={size}
       height={size}
