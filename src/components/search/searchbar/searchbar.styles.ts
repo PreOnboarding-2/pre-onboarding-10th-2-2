@@ -6,6 +6,8 @@ interface IProps {
 
 export const Container = styled.div`
   display: flex;
+  align-items: cneter;
+  justify-content: center;
   width: 490px;
   padding-right: 8px;
   background-color: white;
@@ -28,10 +30,14 @@ export const TextInput = styled.input`
 `;
 
 export const ButtonWrapper = styled.div`
+  background-color: #007be9;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 6px;
 `;
 
 export const SearchButton = styled.button`

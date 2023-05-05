@@ -2,13 +2,14 @@ import { ChangeEvent, useState } from "react";
 import fetchSearchSuggestions from "../../../api/fetchSearchSuggestions";
 import { BASE_URL, CACHE_STORAGE_NAME, DATE_NAME, RESOURCE_PATH } from "../../../constant";
 import { isCacheExpired } from "../../../utils";
+import IconSearch from "../../../assets/icon-search-white.svg";
 import * as S from "./searchbar.styles";
 import { ISearchBarProps } from "./searchbar.types";
 
 export default function SearchBar(props: ISearchBarProps) {
   const [debounce, setDebounce] = useState(0);
 
-  const onChangAutoCompleteSearch = async (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeAutoCompleteSearch = async (event: ChangeEvent<HTMLInputElement>) => {
     const keyword = event.target.value;
 
     if (debounce) window.clearTimeout(debounce);
@@ -67,7 +68,7 @@ export default function SearchBar(props: ISearchBarProps) {
           id="search_bar_main"
           placeholder={props.isVisible ? "" : "질환명을 입력해주세요."}
           ref={props.searchRef}
-          onChange={onChangAutoCompleteSearch}
+          onChange={onChangeAutoCompleteSearch}
           onFocus={onFocusAutoCompleteSearch}
           onBlur={onBlurAutoCompleteSearch}
           onKeyUp={event =>
@@ -79,7 +80,12 @@ export default function SearchBar(props: ISearchBarProps) {
         />
       </S.TextInputWrapper>
       <S.ButtonWrapper>
-        <S.SearchButton onClick={props.onClickSubmitSearch}>검색</S.SearchButton>
+        <img
+          src={IconSearch}
+          alt="icon-search"
+          onClick={props.onClickSubmitSearch}
+          style={{ width: "30px", height: "30px" }}
+        />
       </S.ButtonWrapper>
     </S.Container>
   );
